@@ -142,8 +142,8 @@ require "dracula".setup {
     transparent_bg     = false,
     italic_comment     = true,
     overrides          = {
-        TelescopeNormal = { link = "StatusLine" },
-        NormalFloat     = { link = "StatusLine" },
+        TelescopeNormal = { bg = "#21222c" },
+        NormalFloat     = { bg = "#21222c" },
     },
 }
 vim.cmd "colorscheme dracula"
