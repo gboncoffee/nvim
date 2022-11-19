@@ -8,16 +8,64 @@ g = vim.g
 require "packer".startup(function(use)
     use "wbthomason/packer.nvim"
 
-    use { "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } }
+    -- Telescope {{{
+    use { "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" }, config = function()
+        ta = require "telescope.actions"
+        require "telescope".setup {
+            defaults = {
+                border          = false,
+                layout_strategy = "center",
+                layout_config   = { center = {
+                        width           = 0.75,
+                        height          = 0.75,
+                        prompt_position = "bottom", },
+                },
+                mappings = { i = {
+                        ["<C-k>"] = ta.move_selection_previous,
+                        ["<C-j>"] = ta.move_selection_next, 
+                        ["<C-d>"] = ta.close, },
+                },
+            },
+            pickers = {
+                find_files = { find_command = { "rg", "--glob", "!*.git*", "--hidden", "--files" } },
+                buffers = {
+                    mappings = {
+                        i = { ["<C-d>"] = ta.delete_buffer, },
+                        n = { ["dd"]    = ta.delete_buffer, },
+                    },
+                    initial_mode = "normal",
+                },
+            },
+        }
+    end,
+    } -- }}}
     use { "tpope/vim-fugitive", opt = true, cmd = { "G" } }
     use "kchmck/vim-coffee-script"
     use "preservim/vim-markdown"
     use "tpope/vim-eunuch"
     use "gboncoffee/lf.lua"
     use "gboncoffee/run.vim"
-    use "echasnovski/mini.nvim"
-
-    use "Mofiqul/dracula.nvim"
+    -- Mini.nvim {{{
+    use { "echasnovski/mini.nvim", config = function()
+        require "mini.align".setup()
+        require "mini.comment".setup()
+        require "mini.surround".setup()
+    end,
+    } -- }}}
+    -- Colorscheme {{{
+    use { "Mofiqul/dracula.nvim", config = function()
+        require "dracula".setup {
+            show_end_of_buffer = true,
+            transparent_bg     = false,
+            italic_comment     = true,
+            overrides          = {
+                TelescopeNormal = { bg = "#21222c" },
+                NormalFloat     = { bg = "#21222c" },
+            },
+        }
+        vim.cmd "colorscheme dracula"
+    end,
+    } -- }}}
     use "nvim-tree/nvim-web-devicons"
 end)
 -- }}}
@@ -40,15 +88,15 @@ o.ignorecase = true
 o.tabstop    = 4
 o.shiftwidth = 4
 o.expandtab  = true
+-- window
+o.title = true
+o.titlestring = "%t"
 -- }}}
 
 -- Minor sets {{{
 g.Run_runwin_cmd     = "sp | wincmd J | e"
 g.Run_compilewin_cmd = "e"
 g.vim_markdown_folding_disabled = 1
-require "mini.align".setup()
-require "mini.comment".setup()
-require "mini.surround".setup()
 -- }}}
 
 -- Mappings {{{
@@ -76,12 +124,11 @@ map("n", "<Space>ch",   ":Run ghci<CR>")
 map("n", "<Space>cs",   ":Run btm<CR>")
 map("n", "<Space>cm",   ":Run ncmpcpp<CR>")
 -- buffers/files/sorters
-tb = require "telescope.builtin"
-map("n", "<Space><Tab>", tb.buffers)
-map("n", "<Space>.",     tb.find_files)
-map("n", "<Space>m",     tb.man_pages)
-map("n", "<Space>h",     tb.help_tags)
-map("n", "<Space>/",     tb.live_grep)
+map("n", "<Space><Tab>", ":Telescope buffers")
+map("n", "<Space>.",     ":Telescope find_files")
+map("n", "<Space>m",     ":Telescope man_pages")
+map("n", "<Space>h",     ":Telescope help_tags")
+map("n", "<Space>/",     ":Telescope live_grep")
 -- others
 map("n", "<Space>g",  ":G<CR>")
 map("n", "<Space>f",  ":LfNoChangeCwd<CR>")
@@ -90,36 +137,6 @@ map("n", "<Space>s",  ":s//g<Left><Left>")
 map("n", "<Space>%s", ":%s//g<Left><Left>")
 map("n", "<Space>l",  ":setlocal nu! rnu!<CR>")
 map("n", "<C-n>",     ":nohl<CR>")
--- }}}
-
--- Telescope {{{
-ta = require "telescope.actions"
-require "telescope".setup {
-    defaults = {
-        border          = false,
-        layout_strategy = "center",
-        layout_config   = { center = {
-                width           = 0.75,
-                height          = 0.75,
-                prompt_position = "bottom", },
-        },
-        mappings = { i = {
-                ["<C-k>"] = ta.move_selection_previous,
-                ["<C-j>"] = ta.move_selection_next, 
-                ["<C-d>"] = ta.close, },
-        },
-    },
-    pickers = {
-        find_files = { find_command = { "rg", "--glob", "!*.git*", "--hidden", "--files" } },
-        buffers = {
-            mappings = {
-                i = { ["<C-d>"] = ta.delete_buffer, },
-                n = { ["dd"]    = ta.delete_buffer, },
-            },
-            initial_mode = "normal",
-        },
-    },
-}
 -- }}}
 
 -- Autocmds {{{
@@ -134,17 +151,4 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern  = { "qf", "fugitive", "git", "gitcommit", "run-compiler" },
     command  = "nnoremap <buffer> q :bd<CR>"
 })
--- }}}
-
--- Colorscheme {{{
-require "dracula".setup {
-    show_end_of_buffer = true,
-    transparent_bg     = false,
-    italic_comment     = true,
-    overrides          = {
-        TelescopeNormal = { bg = "#21222c" },
-        NormalFloat     = { bg = "#21222c" },
-    },
-}
-vim.cmd "colorscheme dracula"
 -- }}}
