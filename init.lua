@@ -5,23 +5,21 @@ o = vim.opt
 g = vim.g
 
 -- Plugins {{{
-require "paq" {
-    "savq/paq-nvim",
+require "packer".startup(function(use)
+    use "wbthomason/packer.nvim"
 
-    "nvim-lua/plenary.nvim",
+    use { "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } }
+    use { "tpope/vim-fugitive", opt = true, cmd = { "G" } }
+    use "kchmck/vim-coffee-script"
+    use "preservim/vim-markdown"
+    use "tpope/vim-eunuch"
+    use "gboncoffee/lf.lua"
+    use "gboncoffee/run.vim"
+    use "echasnovski/mini.nvim"
 
-    "nvim-telescope/telescope.nvim",
-    "tpope/vim-fugitive",
-    "kchmck/vim-coffee-script",
-    "preservim/vim-markdown",
-    "tpope/vim-eunuch",
-    "gboncoffee/lf.vim",
-    "gboncoffee/run.vim",
-    "echasnovski/mini.nvim",
-
-    "folke/tokyonight.nvim",
-    "nvim-tree/nvim-web-devicons",
-}
+    use "Mofiqul/dracula.nvim"
+    use "nvim-tree/nvim-web-devicons"
+end)
 -- }}}
 
 -- Great defaults {{{
@@ -112,7 +110,7 @@ require "telescope".setup {
         },
     },
     pickers = {
-        find_files = { find_command = { "rg", "--glob", "!.git/*", "--hidden", "--files" } },
+        find_files = { find_command = { "rg", "--glob", "!*.git*", "--hidden", "--files" } },
         buffers = {
             mappings = {
                 i = { ["<C-d>"] = ta.delete_buffer, },
@@ -138,12 +136,15 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 -- }}}
 
--- choose between dark and light themes
-term_colors = io.popen("readlink " .. os.getenv("HOME") .. "/.config/alacritty/colors.yml"):read()
-if term_colors == os.getenv("HOME") .. "/.config/alacritty/colors/Tokyo-Night-Night.yml" then
-    vim.cmd "colorscheme tokyonight-night"
-else
-    vim.cmd "colorscheme tokyonight-day"
-end
-
-vim.cmd "hi! link EndOfBuffer Identifier"
+-- Colorscheme {{{
+require "dracula".setup {
+    show_end_of_buffer = true,
+    transparent_bg     = false,
+    italic_comment     = true,
+    overrides          = {
+        TelescopeNormal = { link = "StatusLine" },
+        NormalFloat     = { link = "StatusLine" },
+    },
+}
+vim.cmd "colorscheme dracula"
+-- }}}
