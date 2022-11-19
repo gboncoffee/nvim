@@ -79,10 +79,12 @@ map("n", "<Space>ch",   ":Run ghci<CR>")
 map("n", "<Space>cs",   ":Run btm<CR>")
 map("n", "<Space>cm",   ":Run ncmpcpp<CR>")
 -- buffers/files/sorters
+tb = require "telescope.builtin"
 map("n", "<Space><Tab>", ":JABSOpen<CR>")
-map("n", "<Space>.",     ":Telescope find_files<CR>")
-map("n", "<Space>m",     ":Telescope man_pages<CR>")
-map("n", "<Space>h",     ":Telescope help_tags<CR>")
+map("n", "<Space>.",     tb.find_files)
+map("n", "<Space>m",     tb.man_pages)
+map("n", "<Space>h",     tb.help_tags)
+map("n", "<Space>/",     tb.live_grep)
 -- others
 map("n", "<Space>g",  ":G<CR>")
 map("n", "<Space>f",  ":LfNoChangeCwd<CR>")
@@ -97,11 +99,25 @@ map("n", "<C-n>",     ":nohl<CR>")
 ta = require "telescope.actions"
 require "telescope".setup {
     defaults = {
+        border          = false,
+        layout_strategy = "center",
+        layout_config   = {
+            center = {
+                width           = 0.75,
+                height          = 0.75,
+                prompt_position = "bottom",
+            },
+        },
         mappings = {
             i = {
                 ["<C-k>"] = ta.move_selection_previous,
                 ["<C-j>"] = ta.move_selection_next,
             },
+        },
+    },
+    pickers = {
+        find_files = {
+            find_command = { "rg", "--glob", "!.git/*", "--hidden", "--files" }
         },
     },
 }
@@ -110,7 +126,7 @@ require "telescope".setup {
 -- JABS {{{
 require "jabs".setup {
     position = "center",
-    border   = "single",
+    border   = "none",
     use_devicons = true,
     keymap = {
         close   = "dd",
