@@ -39,6 +39,14 @@ require "packer".startup(function(use)
         }
     end,
     } -- }}}
+    use { "ThePrimeagen/harpoon", config = function()
+        require "harpoon".setup {
+            menu = {
+                borderchars = { " ", " ", " ", " ", " ", " ", " ", " ", },
+            }
+        }
+    end,
+    }
     use { "tpope/vim-fugitive", opt = true, cmd = { "G" } }
     use "kchmck/vim-coffee-script"
     use "preservim/vim-markdown"
@@ -61,6 +69,7 @@ require "packer".startup(function(use)
             overrides          = {
                 TelescopeNormal = { bg = "#21222c" },
                 NormalFloat     = { bg = "#21222c" },
+                FloatBorder     = { fg = "#21222c" },
             },
         }
         vim.cmd "colorscheme dracula"
@@ -104,7 +113,6 @@ map = vim.keymap.set
 command = vim.api.nvim_create_user_command
 
 map("n", "<Space><Space>", "/<++><CR>4xi")
-map("n", "<Tab>", "<C-^>")
 
 command("Mit",  "read ~/.config/nvim/LICENSE", {})
 command("Head", "source ~/.config/nvim/header.vim", {})
@@ -123,8 +131,14 @@ map("n", "<Space>cj",   ":Run deno<CR>")
 map("n", "<Space>ch",   ":Run ghci<CR>")
 map("n", "<Space>cs",   ":Run btm<CR>")
 map("n", "<Space>cm",   ":Run ncmpcpp<CR>")
--- buffers/files/sorters
-map("n", "<Space><Tab>", ":Telescope buffers<CR>")
+-- harpoon/telescope
+map("n", "<Space><Tab>", ":lua require 'harpoon.ui'.toggle_quick_menu()<CR>")
+map("n", "<Space>w",     ":lua require 'harpoon.mark'.add_file()<CR>")
+map("n", "<Tab>",        ":lua require 'harpoon.ui'.nav_next()<CR>")
+map("n", "<S-Tab>",      ":lua require 'harpoon.ui'.nav_prev()<CR>")
+for n = 1,9 do
+    map("n", "<Space>"..n, ":lua require 'harpoon.ui'.nav_file("..n..")<CR>")
+end
 map("n", "<Space>.",     ":Telescope find_files<CR>")
 map("n", "<Space>m",     ":Telescope man_pages<CR>")
 map("n", "<Space>h",     ":Telescope help_tags<CR>")
