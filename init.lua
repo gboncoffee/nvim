@@ -48,9 +48,10 @@ require "packer".startup(function(use)
     end,
     }
     use { "tpope/vim-fugitive", opt = true, cmd = { "G" } }
+    use "tpope/vim-eunuch"
+    use "tpope/vim-rsi"
     use "kchmck/vim-coffee-script"
     use "preservim/vim-markdown"
-    use "tpope/vim-eunuch"
     use { "gboncoffee/lf.lua", opt = true, cmd = { "Lf", "LfChangeCwd", "LfNoChangeCwd" } }
     use "gboncoffee/run.vim"
     -- Mini.nvim {{{
@@ -147,8 +148,6 @@ map("n", "<Space>/",     ":Telescope live_grep<CR>")
 map("n", "<Space>g",  ":G<CR>")
 map("n", "<Space>f",  ":LfNoChangeCwd<CR>")
 map("n", "<Space>n",  ":LfChangeCwd<CR>")
-map("n", "<Space>s",  ":s//g<Left><Left>")
-map("n", "<Space>%s", ":%s//g<Left><Left>")
 map("n", "<Space>l",  ":setlocal nu! rnu!<CR>")
 map("n", "<C-n>",     ":nohl<CR>")
 -- }}}
