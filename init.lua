@@ -91,6 +91,7 @@ o.scrolloff  = 5
 o.splitright = true
 o.splitbelow = true
 o.laststatus = 1
+o.guicursor  = ""
 -- editor
 o.foldmethod = "marker"
 o.tw         = 80
