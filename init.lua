@@ -43,7 +43,7 @@ require "packer".startup(function(use)
     use "kchmck/vim-coffee-script"
     use "preservim/vim-markdown"
     use "tpope/vim-eunuch"
-    use "gboncoffee/lf.lua"
+    use { "gboncoffee/lf.lua", opt = true, cmd = { "Lf", "LfChangeCwd", "LfNoChangeCwd" } }
     use "gboncoffee/run.vim"
     -- Mini.nvim {{{
     use { "echasnovski/mini.nvim", config = function()
