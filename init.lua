@@ -121,7 +121,7 @@ command("Head", "source ~/.config/nvim/header.vim", {})
 
 -- run.vim
 map("n", "<Space>b", ":Compile<CR>")
--- map("n", "<Space>a", ":CompileAuto<CR>")
+map("n", "<Space>a", ":CompileAuto<CR>")
 map("n", "<Space>r", ":CompileReset<CR>")
 map("n", "<Space>t", ":CompileFocus<CR>")
 -- run.vim :Run
