@@ -53,7 +53,7 @@ require "packer".startup(function(use)
     use "kchmck/vim-coffee-script"
     use "preservim/vim-markdown"
     use { "gboncoffee/lf.lua", opt = true, cmd = { "Lf", "LfChangeCwd", "LfNoChangeCwd" } }
-    use "gboncoffee/run.vim"
+    use "gboncoffee/run.lua"
     -- Mini.nvim {{{
     use { "echasnovski/mini.nvim", config = function()
         require "mini.align".setup()
@@ -121,8 +121,9 @@ command("Head", "source ~/.config/nvim/header.vim", {})
 
 -- run.vim
 map("n", "<Space>b", ":Compile<CR>")
-map("n", "<Space>a", ":CompileAuto<CR>")
+-- map("n", "<Space>a", ":CompileAuto<CR>")
 map("n", "<Space>r", ":CompileReset<CR>")
+map("n", "<Space>t", ":CompileFocus<CR>")
 -- run.vim :Run
 map("n", "<Space><CR>", ":Run<CR>")
 map("n", "<Space>cp",   ":Run python<CR>")
