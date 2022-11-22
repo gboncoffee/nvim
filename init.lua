@@ -151,7 +151,6 @@ map("n", "<Space>g",  ":G<CR>")
 map("n", "<Space>f",  ":LfNoChangeCwd<CR>")
 map("n", "<Space>n",  ":LfChangeCwd<CR>")
 map("n", "<Space>l",  ":setlocal nu! rnu!<CR>")
-map("n", "<C-n>",     ":nohl<CR>")
 -- }}}
 
 -- Autocmds {{{
