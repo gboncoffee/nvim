@@ -144,9 +144,9 @@ for n = 1,9 do
     map("n", "<Space>"..n, ":lua require 'harpoon.ui'.nav_file("..n..")<CR>")
 end
 map("n", "<Space>.",     ":Telescope find_files<CR>")
-map("n", "<Space>m",     ":Telescope man_pages<CR>")
+map("n", "<Space>m",     ":lua require'telescope.builtin'.man_pages({sections={'ALL'}})<CR>")
 map("n", "<Space>h",     ":Telescope help_tags<CR>")
-map("n", "<Space>/",     ":Telescope live_grep<CR>")
+map("n", "<Space>/",     ":lua require'telescope.builtin'.live_grep({glob_pattern='!*.git*',additional_args={'--hidden'}})<CR>")
 -- others
 map("n", "<Space>g",  ":G<CR>")
 map("n", "<Space>f",  ":LfNoChangeCwd<CR>")
