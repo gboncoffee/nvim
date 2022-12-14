@@ -53,6 +53,7 @@ require "packer".startup(function(use)
     use "preservim/vim-markdown"
     use { "gboncoffee/lf.lua", opt = true, cmd = { "Lf", "LfChangeCwd", "LfNoChangeCwd" } }
     use "gboncoffee/run.lua"
+    use "gboncoffee/yaft.lua"
     -- Mini.nvim {{{
     use { "echasnovski/mini.nvim", config = function()
         require "mini.align".setup()
@@ -64,7 +65,7 @@ require "packer".startup(function(use)
     use { "Mofiqul/dracula.nvim", config = function()
         require "dracula".setup {
             show_end_of_buffer = true,
-            transparent_bg     = false,
+            transparent_bg     = true,
             italic_comment     = true,
             overrides          = {
                 TelescopeNormal = { bg = "#21222c" },
