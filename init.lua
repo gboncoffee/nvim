@@ -156,7 +156,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 vim.api.nvim_create_autocmd("FileType", {
     group    = filetype_settings,
-    pattern  = { "qf", "fugitive", "git", "gitcommit", "run-compiler" },
+    pattern  = { "qf", "fugitive", "git", "gitcommit", "help" },
     command  = "nnoremap <buffer> q :bd<CR>"
 })
 -- }}}
