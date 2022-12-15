@@ -59,6 +59,11 @@ require "packer".startup(function(use)
             show_end_of_buffer = true,
             transparent_bg     = true,
             italic_comment     = true,
+            overrides = {
+                StatusLine   = { bg = "#21222c" },
+                StatusLineNC = { bg = "#21222c", fg = "#6272a4" },
+                VertSplit    = { fg = "#abb2bf" },
+            }
         }
         vim.cmd "colorscheme dracula"
     end,
