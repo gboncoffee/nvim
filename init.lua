@@ -13,7 +13,6 @@ require "packer".startup(function(use)
         ta = require "telescope.actions"
         require "telescope".setup {
             defaults = {
-                border          = false,
                 layout_strategy = "center",
                 layout_config   = { center = {
                         width           = 0.75,
@@ -38,14 +37,7 @@ require "packer".startup(function(use)
         }
     end,
     } -- }}}
-    use { "ThePrimeagen/harpoon", config = function()
-        require "harpoon".setup {
-            menu = {
-                borderchars = { " ", " ", " ", " ", " ", " ", " ", " ", },
-            }
-        }
-    end,
-    }
+    use { "ThePrimeagen/harpoon", requires = { "nvim-lua/plenary.nvim" } }
     use { "tpope/vim-fugitive", opt = true, cmd = { "G" } }
     use "tpope/vim-eunuch"
     use "tpope/vim-rsi"
@@ -67,11 +59,6 @@ require "packer".startup(function(use)
             show_end_of_buffer = true,
             transparent_bg     = true,
             italic_comment     = true,
-            overrides          = {
-                TelescopeNormal = { bg = "#21222c" },
-                NormalFloat     = { bg = "#21222c" },
-                FloatBorder     = { fg = "#21222c" },
-            },
         }
         vim.cmd "colorscheme dracula"
     end,
