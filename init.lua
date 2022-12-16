@@ -45,7 +45,7 @@ require "packer".startup(function(use)
     use "preservim/vim-markdown"
     use { "gboncoffee/lf.lua", opt = true, cmd = { "Lf", "LfChangeCwd", "LfNoChangeCwd" } }
     use "gboncoffee/run.lua"
-    use "gboncoffee/yaft.lua"
+    use "~/src/yaft.lua"
     -- Mini.nvim {{{
     use { "echasnovski/mini.nvim", config = function()
         require "mini.align".setup()
@@ -135,16 +135,18 @@ map("n", "<S-Tab>",      ":lua require 'harpoon.ui'.nav_prev()<CR>")
 for n = 1,9 do
     map("n", "<Space>"..n, ":lua require 'harpoon.ui'.nav_file("..n..")<CR>")
 end
-map("n", "<Space>.",     ":Telescope find_files<CR>")
-map("n", "<Space>m",     ":lua require'telescope.builtin'.man_pages({sections={'ALL'}})<CR>")
-map("n", "<Space>h",     ":Telescope help_tags<CR>")
-map("n", "<Space>/",     ":lua require'telescope.builtin'.live_grep({glob_pattern='!*.git*',additional_args={'--hidden'}})<CR>")
+map("n", "<Space>.", ":Telescope find_files<CR>")
+map("n", "<Space>m", ":lua require'telescope.builtin'.man_pages({sections={'ALL'}})<CR>")
+map("n", "<Space>h", ":Telescope help_tags<CR>")
+map("n", "<Space>/", ":lua require'telescope.builtin'.live_grep({glob_pattern='!*.git*',additional_args={'--hidden'}})<CR>")
 -- others
-map("n", "<Space>g",  ":G<CR>")
-map("n", "<Space>n",  ":YaftToggle<CR>")
-map("n", "<Space>f",  ":LfNoChangeCwd<CR>")
-map("n", "<C-d>",     "<C-d>zz")
-map("n", "<C-u>",     "<C-u>zz")
+map("n", "<Space>g", ":G<CR>")
+map("n", "<Space>n", ":YaftToggle<CR>")
+map("n", "<Space>f", ":LfNoChangeCwd<CR>")
+map("n", "<C-d>",    "<C-d>zz")
+map("n", "<C-u>",    "<C-u>zz")
+map("v", "J",        ":m '>+1<CR>gv=gv")
+map("v", "K",        ":m '<-2<CR>gv=gv")
 -- }}}
 
 -- Autocmds {{{
