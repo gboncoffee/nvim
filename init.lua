@@ -143,8 +143,12 @@ map("n", "<Space>/", ":lua require'telescope.builtin'.live_grep({glob_pattern='!
 map("n", "<Space>g", ":G<CR>")
 map("n", "<Space>n", ":YaftToggle<CR>")
 map("n", "<Space>f", ":LfNoChangeCwd<CR>")
+-- keep things in the middle
 map("n", "<C-d>",    "<C-d>zz")
 map("n", "<C-u>",    "<C-u>zz")
+map("n", "N",        "nzzzv")
+map("n", "n",        "Nzzzv")
+-- utils
 map("v", "J",        ":m '>+1<CR>gv=gv")
 map("v", "K",        ":m '<-2<CR>gv=gv")
 -- }}}
