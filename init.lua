@@ -165,4 +165,17 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern  = { "qf", "fugitive", "git", "gitcommit", "help" },
     command  = "nnoremap <buffer> q :bd<CR>"
 })
+vim.api.nvim_create_autocmd({ "BufEnter", "TermEnter" }, {
+    group    = filetype_settings,
+    pattern  = "*",
+    callback = function()
+        local buftype  = vim.api.nvim_buf_get_option(0, "buftype")
+        local filetype = vim.api.nvim_buf_get_option(0, "filetype")
+        if (buftype == "") and (filetype ~= "gitcommit") then
+            vim.cmd "setlocal nu rnu"
+        else
+            vim.cmd "setlocal nonu nornu"
+        end
+    end
+})
 -- }}}
