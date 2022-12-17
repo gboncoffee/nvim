@@ -71,10 +71,12 @@ end)
 vim.cmd "set clipboard^=unnamedplus | set path+=**"
 o.conceallevel = 2
 
+g.vim_markdown_folding_disabled = 1
+
 -- appearance/visual helpers
 o.wrap       = false
 o.signcolumn = "no"
-o.scrolloff  = 5
+o.scrolloff  = 10
 o.splitright = true
 o.splitbelow = true
 o.laststatus = 1
@@ -92,12 +94,6 @@ o.title = true
 o.titlestring = "%t"
 -- }}}
 
--- Minor sets {{{
-g.Run_runwin_cmd     = "sp | wincmd J | e"
-g.Run_compilewin_cmd = "e"
-g.vim_markdown_folding_disabled = 1
--- }}}
-
 -- Mappings {{{
 map = vim.keymap.set
 command = vim.api.nvim_create_user_command
@@ -108,10 +104,10 @@ command("Mit",  "read ~/.config/nvim/LICENSE", {})
 command("Head", "source ~/.config/nvim/header.vim", {})
 
 -- run.vim
-map("n", "<Space>b", ":Compile<CR>")
-map("n", "<Space>a", ":CompileAuto<CR>")
-map("n", "<Space>r", ":CompileReset<CR>")
-map("n", "<Space>t", ":CompileFocus<CR>")
+map("n", "<Space>b", ":wall | Compile<CR>")
+map("n", "<Space>a", ":wall | CompileAuto<CR>")
+map("n", "<Space>r", ":wall | CompileReset<CR>")
+map("n", "<Space>t",        ":CompileFocus<CR>")
 -- run.vim :Run
 map("n", "<Space><CR>", ":Run<CR>")
 map("n", "<Space>cp",   ":Run python<CR>")
