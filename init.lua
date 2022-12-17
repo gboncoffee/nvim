@@ -27,12 +27,6 @@ require "packer".startup(function(use)
             },
             pickers = {
                 find_files = { find_command = { "rg", "--glob", "!*.git*", "--hidden", "--files" } },
-                buffers = {
-                    mappings = {
-                        i = { ["<C-q>"] = ta.delete_buffer, },
-                        n = { ["dd"]    = ta.delete_buffer, },
-                    },
-                },
             },
         }
     end,
@@ -147,8 +141,8 @@ map("n", "<Space>f", ":LfNoChangeCwd<CR>")
 -- keep things in the middle
 map("n", "<C-d>",    "<C-d>zz")
 map("n", "<C-u>",    "<C-u>zz")
-map("n", "N",        "nzzzv")
-map("n", "n",        "Nzzzv")
+map("n", "n",        "nzzzv")
+map("n", "N",        "Nzzzv")
 -- utils
 map("v", "J",        ":m '>+1<CR>gv=gv")
 map("v", "K",        ":m '<-2<CR>gv=gv")
