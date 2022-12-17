@@ -96,14 +96,15 @@ vim.cmd "set clipboard^=unnamedplus | set path+=**"
 o.conceallevel = 2
 
 -- appearance/visual helpers
-o.wrap       = false
-o.signcolumn = "no"
-o.scrolloff  = 10
-o.splitright = true
-o.splitbelow = true
-o.laststatus = 1
-o.guicursor  = "n-v-c-sm:block,i-ve:ver25"
-o.cursorline = true
+o.wrap        = false
+o.signcolumn  = "no"
+o.scrolloff   = 10
+o.splitright  = true
+o.splitbelow  = true
+o.laststatus  = 1
+o.showtabline = 0
+o.guicursor   = "n-v-c-sm:block,i-ve:ver25"
+o.cursorline  = true
 -- editor
 o.foldmethod = "marker"
 o.tw         = 80
@@ -153,7 +154,7 @@ map("n", "<Space>m", ":lua require'telescope.builtin'.man_pages({sections={'ALL'
 map("n", "<Space>h", ":Telescope help_tags<CR>")
 map("n", "<Space>/", ":lua require'telescope.builtin'.live_grep({glob_pattern='!*.git*',additional_args={'--hidden'}})<CR>")
 -- others
-map("n", "<Space>g", ":G<CR>")
+map("n", "<Space>g", ":tab G<CR>")
 map("n", "<Space>n", ":YaftToggle<CR>")
 map("n", "<Space>f", ":LfNoChangeCwd<CR>")
 -- keep things in the middle
