@@ -45,7 +45,7 @@ require "packer".startup(function(use)
     use "preservim/vim-markdown"
     use { "gboncoffee/lf.lua", opt = true, cmd = { "Lf", "LfChangeCwd", "LfNoChangeCwd" } }
     use "gboncoffee/run.lua"
-    use "~/src/yaft.lua"
+    use "gboncoffee/yaft.lua"
     -- Mini.nvim {{{
     use { "echasnovski/mini.nvim", config = function()
         require "mini.align".setup()
