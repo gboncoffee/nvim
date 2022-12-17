@@ -36,7 +36,31 @@ require "packer".startup(function(use)
     use "tpope/vim-eunuch"
     use "tpope/vim-rsi"
     use "kchmck/vim-coffee-script"
-    use "preservim/vim-markdown"
+    -- Treesitter {{{
+    use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = function()
+        require "nvim-treesitter.configs".setup {
+            sync_install = false,
+            ensure_installed = {
+                "c",
+                "lua",
+                "rust",
+                "bash",
+                "haskell",
+                "javascript",
+                "html",
+                "julia",
+                "markdown",
+                "markdown_inline",
+                "python",
+                "css"
+            },
+            highlight = {
+                enable = true,
+            },
+        }
+    end,
+    }
+    -- }}}
     use { "gboncoffee/lf.lua", opt = true, cmd = { "Lf", "LfChangeCwd", "LfNoChangeCwd" } }
     use "gboncoffee/run.lua"
     use "gboncoffee/yaft.lua"
@@ -70,8 +94,6 @@ end)
 -- Great defaults {{{
 vim.cmd "set clipboard^=unnamedplus | set path+=**"
 o.conceallevel = 2
-
-g.vim_markdown_folding_disabled = 1
 
 -- appearance/visual helpers
 o.wrap       = false
