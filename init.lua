@@ -4,11 +4,9 @@
 o = vim.opt
 g = vim.g
 
--- Plugins {{{
 require "packer".startup(function(use)
     use "wbthomason/packer.nvim"
 
-    -- Telescope {{{
     use { "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" }, config = function()
         ta = require "telescope.actions"
         require "telescope".setup {
@@ -30,13 +28,12 @@ require "packer".startup(function(use)
             },
         }
     end,
-    } -- }}}
+    }
     use { "ThePrimeagen/harpoon", requires = { "nvim-lua/plenary.nvim" } }
     use { "tpope/vim-fugitive", opt = true, cmd = { "G" } }
     use "tpope/vim-eunuch"
     use "tpope/vim-rsi"
     use "kchmck/vim-coffee-script"
-    -- Treesitter {{{
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = function()
         require "nvim-treesitter.configs".setup {
             sync_install = false,
@@ -60,19 +57,16 @@ require "packer".startup(function(use)
         }
     end,
     }
-    -- }}}
     use { "gboncoffee/lf.lua", opt = true, cmd = { "Lf", "LfChangeCwd", "LfNoChangeCwd" } }
     use "gboncoffee/run.lua"
     use "gboncoffee/yaft.lua"
-    -- Mini.nvim {{{
     use { "echasnovski/mini.nvim", config = function()
         require "mini.align".setup()
         require "mini.comment".setup()
         require "mini.surround".setup()
         require "mini.pairs".setup()
     end,
-    } -- }}}
-    -- Colorscheme {{{
+    }
     use { "Mofiqul/dracula.nvim", config = function()
         require "dracula".setup {
             show_end_of_buffer = true,
@@ -86,12 +80,23 @@ require "packer".startup(function(use)
         }
         vim.cmd "colorscheme dracula"
     end,
-    } -- }}}
+    }
     use "nvim-tree/nvim-web-devicons"
 end)
--- }}}
 
--- Great defaults {{{
+-- Ft/Treesitter configs
+g.rust_recommended_style = 1
+g.rustfmt_command        = "rustfmt"
+g.rustfmt_autosave       = 1
+vim.cmd[[
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set nofoldenable
+]]
+
+--
+-- Great defaults
+--
 vim.cmd "set clipboard^=unnamedplus | set path+=**"
 o.conceallevel = 2
 
@@ -106,7 +111,6 @@ o.showtabline = 0
 o.guicursor   = "n-v-c-sm:block,i-ve:ver25"
 o.cursorline  = true
 -- editor
-o.foldmethod = "marker"
 o.tw         = 80
 o.ignorecase = true
 o.tabstop    = 4
@@ -115,9 +119,10 @@ o.expandtab  = true
 -- window
 o.title = true
 o.titlestring = "%t"
--- }}}
 
--- Mappings {{{
+--
+-- Mappings
+--
 map = vim.keymap.set
 command = vim.api.nvim_create_user_command
 
@@ -165,9 +170,8 @@ map("n", "N",        "Nzzzv")
 -- utils
 map("v", "J",        ":m '>+1<CR>gv=gv")
 map("v", "K",        ":m '<-2<CR>gv=gv")
--- }}}
 
--- Autocmds {{{
+-- Autocmds
 filetype_settings = vim.api.nvim_create_augroup("FiletypeSettings", {})
 vim.api.nvim_create_autocmd("FileType", {
     group    = filetype_settings,
