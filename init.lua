@@ -179,7 +179,7 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern  = { "qf", "fugitive", "git", "gitcommit", "help" },
     command  = "nnoremap <buffer> q :bd<CR>"
 })
-vim.api.nvim_create_autocmd({ "BufEnter", "TermEnter" }, {
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
     group    = filetype_settings,
     pattern  = "*",
     callback = function()
