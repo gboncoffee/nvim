@@ -146,6 +146,7 @@ map("n", "<Space>cj",   ":Run deno<CR>")
 map("n", "<Space>ch",   ":Run ghci<CR>")
 map("n", "<Space>cs",   ":Run pulsemixer<CR>")
 map("n", "<Space>cm",   ":Run ncmpcpp<CR>")
+map("n", "<Space>ct",   ":Run btm<CR>")
 -- harpoon/telescope
 map("n", "<Space><Tab>", ":lua require 'harpoon.ui'.toggle_quick_menu()<CR>")
 map("n", "<Space>w",     ":lua require 'harpoon.mark'.add_file()<CR>")
