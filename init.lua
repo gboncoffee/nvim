@@ -110,6 +110,7 @@ o.laststatus  = 1
 o.showtabline = 0
 o.guicursor   = "n-v-c-sm:block,i-ve:ver25"
 o.cursorline  = true
+o.hlsearch    = false
 -- editor
 o.tw         = 80
 o.ignorecase = true
