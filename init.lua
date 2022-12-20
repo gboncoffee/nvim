@@ -161,7 +161,7 @@ map("n", "<Space>m", ":lua require'telescope.builtin'.man_pages({sections={'ALL'
 map("n", "<Space>h", ":Telescope help_tags<CR>")
 map("n", "<Space>/", ":lua require'telescope.builtin'.live_grep({glob_pattern='!*.git*',additional_args={'--hidden'}})<CR>")
 -- others
-map("n", "<Space>g", ":tab G<CR>")
+map("n", "<Space>g", ":vert G<CR>")
 map("n", "<Space>n", ":YaftToggle<CR>")
 map("n", "<Space>f", ":LfNoChangeCwd<CR>")
 -- keep things in the middle
