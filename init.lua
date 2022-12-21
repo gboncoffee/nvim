@@ -141,9 +141,8 @@ command = vim.api.nvim_create_user_command
 
 map("n", "<Space><Space>", "/<++><CR>4xi")
 
-command("Mit",    "read ~/.config/nvim/LICENSE", {})
-command("Head",   "source ~/.config/nvim/header.vim", {})
-command("Config", "cd ~/.config/nvim | lua require 'yaft'.reload_yaft(); require 'yaft'.open_file_in_editor('init.lua')", {})
+command("Mit",  "read ~/.config/nvim/LICENSE", {})
+command("Head", "source ~/.config/nvim/header.vim", {})
 
 -- run.vim
 map("n", "<Space>b", ":wall | Compile<CR>")
@@ -210,9 +209,4 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
             vim.cmd "setlocal nonu nornu"
         end
     end
-})
-vim.api.nvim_create_autocmd("VimEnter", {
-    group    = filetype_settings,
-    pattern  = "*",
-    command  = "YaftToggle"
 })
