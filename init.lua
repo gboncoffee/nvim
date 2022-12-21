@@ -4,23 +4,35 @@
 o = vim.opt
 g = vim.g
 
-require "packer".startup(function(use)
-    use "wbthomason/packer.nvim"
+-- bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "--single-branch",
+        "https://github.com/folke/lazy.nvim.git",
+        lazypath,
+    })
+end
+o.runtimepath:prepend(lazypath)
 
-    use { "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" }, config = function()
+require "lazy".setup {
+    { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" }, config = function()
         ta = require "telescope.actions"
         require "telescope".setup {
             defaults = {
                 layout_strategy = "center",
                 layout_config   = { center = {
-                        width           = 0.75,
-                        height          = 0.75,
-                        prompt_position = "bottom", },
+                    width           = 0.75,
+                    height          = 0.75,
+                    prompt_position = "bottom", },
                 },
                 mappings = { i = {
-                        ["<C-k>"] = ta.move_selection_previous,
-                        ["<C-j>"] = ta.move_selection_next, 
-                        ["<C-d>"] = ta.close, },
+                    ["<C-k>"] = ta.move_selection_previous,
+                    ["<C-j>"] = ta.move_selection_next, 
+                    ["<C-d>"] = ta.close, },
                 },
             },
             pickers = {
@@ -28,13 +40,13 @@ require "packer".startup(function(use)
             },
         }
     end,
-    }
-    use { "ThePrimeagen/harpoon", requires = { "nvim-lua/plenary.nvim" } }
-    use { "tpope/vim-fugitive", opt = true, cmd = { "G" } }
-    use "tpope/vim-eunuch"
-    use "tpope/vim-rsi"
-    use "kchmck/vim-coffee-script"
-    use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = function()
+    },
+    { "ThePrimeagen/harpoon", dependencies = { "nvim-lua/plenary.nvim" } },
+    { "tpope/vim-fugitive", lazy = true, cmd = "G" },
+    "tpope/vim-eunuch",
+    "tpope/vim-rsi",
+    "kchmck/vim-coffee-script",
+    { "nvim-treesitter/nvim-treesitter", build = function(l) vim.cmd("TSUpdate") end, config = function()
         require "nvim-treesitter.configs".setup {
             sync_install = false,
             ensure_installed = {
@@ -56,18 +68,18 @@ require "packer".startup(function(use)
             },
         }
     end,
-    }
-    use { "gboncoffee/lf.lua", opt = true, cmd = { "Lf", "LfChangeCwd", "LfNoChangeCwd" } }
-    use "gboncoffee/run.lua"
-    use "gboncoffee/yaft.lua"
-    use { "echasnovski/mini.nvim", config = function()
+    },
+    { "gboncoffee/lf.lua", lazy = true, cmd = { "Lf", "LfChangeCwd", "LfNoChangeCwd" } },
+    { "gboncoffee/run.lua", lazy = true, cmd = { "Compile", "CompileAuto", "CompileReset", "Run", "Async" } },
+    { "gboncoffee/yaft.lua", lazy = true, cmd = { "YaftToggle" } },
+    { "echasnovski/mini.nvim", config = function()
         require "mini.align".setup()
         require "mini.comment".setup()
         require "mini.surround".setup()
         require "mini.pairs".setup()
     end,
-    }
-    use { "Mofiqul/dracula.nvim", config = function()
+    },
+    { "Mofiqul/dracula.nvim", config = function()
         require "dracula".setup {
             show_end_of_buffer = true,
             transparent_bg     = true,
@@ -80,9 +92,9 @@ require "packer".startup(function(use)
         }
         vim.cmd "colorscheme dracula"
     end,
-    }
-    use "nvim-tree/nvim-web-devicons"
-end)
+    },
+    "nvim-tree/nvim-web-devicons",
+}
 
 -- Ft/Treesitter configs
 g.rust_recommended_style = 1
