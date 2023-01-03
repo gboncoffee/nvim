@@ -33,7 +33,6 @@ require "packer".startup(function(use)
     use { "tpope/vim-fugitive", opt = true, cmd = { "G" } }
     use "tpope/vim-eunuch"
     use "tpope/vim-rsi"
-    use "kchmck/vim-coffee-script"
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = function()
         require "nvim-treesitter.configs".setup {
             sync_install = false,
@@ -140,7 +139,6 @@ map("n", "<Space>t",        ":CompileFocus<CR>")
 -- run.vim :Run
 map("n", "<Space><CR>", ":Run<CR>")
 map("n", "<Space>cp",   ":Run python<CR>")
-map("n", "<Space>co",   ":Run coffee<CR>")
 map("n", "<Space>cl",   ":Run lua<CR>")
 map("n", "<Space>cc",   ":Run julia<CR>")
 map("n", "<Space>cj",   ":Run deno<CR>")
