@@ -31,7 +31,6 @@ require "packer".startup(function(use)
     }
     use { "ThePrimeagen/harpoon", requires = { "nvim-lua/plenary.nvim" } }
     use { "tpope/vim-fugitive", opt = true, cmd = { "G" } }
-    use "tpope/vim-rsi"
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = function()
         require "nvim-treesitter.configs".setup {
             sync_install = false,
@@ -58,6 +57,7 @@ require "packer".startup(function(use)
     use { "gboncoffee/lf.lua", opt = true, cmd = { "Lf", "LfChangeCwd", "LfNoChangeCwd" } }
     use "gboncoffee/run.lua"
     use "gboncoffee/yaft.lua"
+    use "gboncoffee/nvim-rsi"
     use { "echasnovski/mini.nvim", config = function()
         require "mini.align".setup()
         require "mini.comment".setup()
