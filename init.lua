@@ -31,7 +31,6 @@ require "packer".startup(function(use)
     }
     use { "ThePrimeagen/harpoon", requires = { "nvim-lua/plenary.nvim" } }
     use { "tpope/vim-fugitive", opt = true, cmd = { "G" } }
-    use "tpope/vim-eunuch"
     use "tpope/vim-rsi"
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = function()
         require "nvim-treesitter.configs".setup {
