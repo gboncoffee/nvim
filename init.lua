@@ -58,6 +58,11 @@ require "packer".startup(function(use)
     use "gboncoffee/run.lua"
     use "gboncoffee/yaft.lua"
     use "gboncoffee/nvim-rsi"
+    use { "gboncoffee/licenses.lua", config = function()
+        g.Licenses_name = "Gabriel G. de Brito"
+        g.Licenses_mail = "gabrielgbrito@icloud.com"
+    end,
+    }
     use { "echasnovski/mini.nvim", config = function()
         require "mini.align".setup()
         require "mini.comment".setup()
@@ -125,9 +130,6 @@ map = vim.keymap.set
 command = vim.api.nvim_create_user_command
 
 map("n", "<Space><Space>", "/<++><CR>4xi")
-
-command("Mit",  "read ~/.config/nvim/LICENSE", {})
-command("Head", "source ~/.config/nvim/header.vim", {})
 
 -- run.vim
 map("n", "<Space>b", ":wall | Compile<CR>")
