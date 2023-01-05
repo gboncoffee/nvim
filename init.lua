@@ -111,7 +111,6 @@ o.splitright  = true
 o.splitbelow  = true
 o.laststatus  = 3
 o.guicursor   = "n-v-c-sm:block,i-ve:ver25"
-o.cursorline  = true
 o.hlsearch    = false
 -- editor
 o.tw         = 80
