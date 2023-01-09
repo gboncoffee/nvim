@@ -158,7 +158,7 @@ map("n", "<Space>h", ":Telescope help_tags<CR>")
 map("n", "<Space>/", ":lua require'telescope.builtin'.live_grep({glob_pattern='!*.git*',additional_args={'--hidden'}})<CR>")
 -- others
 map("n", "<Space>g", ":vert G<CR>")
-map("n", "<Space>n", ":YaftToggle<CR>")
+map("n", "<Space>n", ":LfChangeCwd<CR>")
 map("n", "<Space>f", ":LfNoChangeCwd<CR>")
 -- keep things in the middle
 map("n", "<C-d>",    "<C-d>zz")
@@ -185,6 +185,11 @@ vim.api.nvim_create_autocmd("Filetype", {
     group    = filetype_settings,
     pattern  = "rust",
     command  = "inoremap <buffer> ' '"
+})
+vim.api.nvim_create_autocmd("FileType", {
+    group    = filetype_settings,
+    pattern  = "man",
+    command  = "setlocal nobuflisted"
 })
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
     group    = filetype_settings,
