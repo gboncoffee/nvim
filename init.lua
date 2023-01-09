@@ -56,7 +56,6 @@ require "packer".startup(function(use)
     }
     use { "gboncoffee/lf.lua", opt = true, cmd = { "Lf", "LfChangeCwd", "LfNoChangeCwd" } }
     use "gboncoffee/run.lua"
-    use "gboncoffee/yaft.lua"
     use "gboncoffee/nvim-rsi"
     use { "gboncoffee/licenses.lua", config = function()
         g.Licenses_name = "Gabriel G. de Brito"
