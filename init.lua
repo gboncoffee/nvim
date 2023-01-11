@@ -78,6 +78,9 @@ require "packer".startup(function(use)
                 StatusLine   = { bg = "#21222c" },
                 StatusLineNC = { bg = "#21222c", fg = "#6272a4" },
                 VertSplit    = { fg = "#abb2bf" },
+                LineNrAbove  = { fg = "#6272a4" },
+                LineNrBelow  = { link = "LineNrAbove" },
+                LineNr       = { fg = "#bd93f9", bold = true },
             }
         }
         vim.cmd "colorscheme dracula"
